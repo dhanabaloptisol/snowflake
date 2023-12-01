@@ -28,9 +28,9 @@ jobs:
       - name: Show Version
         run:  ~/bin/snowsql -v
 
-      # - name: Execute SQL Scripts
-      #   run: |
-      #     for file in snowflake/*.sql; do
-      #       snowsql -f $file
-      #     done
+      - name: Execute SQL Scripts
+        run: |
+          for file in snowflake/*.sql; do
+            ~/bin/snowsql -f $file
+          done
         
