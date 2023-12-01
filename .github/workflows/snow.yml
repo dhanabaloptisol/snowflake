@@ -1,7 +1,7 @@
 name: SnowSQL
 env:
   
-  SNOWSQL_ACCOUNT: OOZELMY.LXB06506
+  SNOWSQL_ACCOUNT: https://wab81387.us-east-1.snowflakecomputing.com
   SNOWSQL_USER: dhanabaloptisol
   SNOWSQL_PWD: ${{ secrets.SF_PASSWORD }}
   
