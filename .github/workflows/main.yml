@@ -27,7 +27,7 @@ jobs:
       - name: Execute SQL Scripts
         run: |
           for file in snowflake/*.sql; do
-            ~/bin/snowsql -a $SNOWFLAKE_ACCOUNT -u dhanabaloptisol -d $SNOWFLAKE_DATABASE -w $SNOWFLAKE_WAREHOUSE -s PUBLIC -f $file -o log_level=DEBUG
+            ~/bin/snowsql -a $SNOWFLAKE_ACCOUNT -u "dhanabaloptisol" -d $SNOWFLAKE_DATABASE -w $SNOWFLAKE_WAREHOUSE -s PUBLIC -f $file -o log_level=DEBUG
           done
           env:
             SNOWFLAKE_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
