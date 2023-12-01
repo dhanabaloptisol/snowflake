@@ -32,15 +32,15 @@ jobs:
     - name: Show Version
       run:  ~/bin/snowsql -v
 
-    # - name: Execute SQL Script
-    #   run: |
-    #     for file in snowflake/*.sql; do
-    #        snowsql -a $SNOWFLAKE_ACCOUNT -u $SNOWFLAKE_USERNAME -d $SNOWFLAKE_DATABASE -s PUBLIC -w $SNOWFLAKE_WAREHOUSE -r $SNOWFLAKE_ROLE -f $file
-    #     done
-    #   env:
-    #     SNOWFLAKE_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
-    #     SNOWFLAKE_USERNAME: ${{ secrets.SF_USERNAME }}
-    #     SNOWFLAKE_DATABASE: ${{ secrets.SF_DATABASE }}
-    #     #SNOWFLAKE_SCHEMA: ${{ secrets.SF_SCHEMA }}
-    #     SNOWFLAKE_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
-    #     SNOWFLAKE_ROLE: ${{ secrets.SF_ROLE }}
+    - name: Execute SQL Script
+      run: |
+        for file in snowflake/*.sql; do
+           ~/bin/snowsql -a $SNOWFLAKE_ACCOUNT -u $SNOWFLAKE_USERNAME -d $SNOWFLAKE_DATABASE -s PUBLIC -w $SNOWFLAKE_WAREHOUSE -r $SNOWFLAKE_ROLE -f $file
+        done
+      env:
+        SNOWFLAKE_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
+        SNOWFLAKE_USERNAME: ${{ secrets.SF_USERNAME }}
+        SNOWFLAKE_DATABASE: ${{ secrets.SF_DATABASE }}
+        #SNOWFLAKE_SCHEMA: ${{ secrets.SF_SCHEMA }}
+        SNOWFLAKE_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
+        SNOWFLAKE_ROLE: ${{ secrets.SF_ROLE }}
