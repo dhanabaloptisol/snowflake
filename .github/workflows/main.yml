@@ -25,10 +25,12 @@ jobs:
         run:  curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.9-linux_x86_64.bash
       - name: Install SnowSQL
         run:  SNOWSQL_DEST=~/bin SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.9-linux_x86_64.bash
+      - name: Show Version
+        run:  snowsql -v
 
-      - name: Execute SQL Scripts
-        run: |
-          for file in snowflake/*.sql; do
-            snowsql -f $file
-          done
+      # - name: Execute SQL Scripts
+      #   run: |
+      #     for file in snowflake/*.sql; do
+      #       snowsql -f $file
+      #     done
         
