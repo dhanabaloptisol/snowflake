@@ -1,7 +1,6 @@
-# This is a basic workflow to help you get started with Actions
+name: new-demo
 
-name: CICD
-
+# Controls when the action will run. 
 on:
   push:
     branches:
@@ -9,34 +8,36 @@ on:
     paths:
       - 'snowflake/**'
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
 jobs:
-  deploy:
+  deploy-snowflake-changes-job:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      - name: Use Python 3.8.x
+        uses: actions/setup-python@v2.2.1
         with:
-          python-version: 3.x
+          python-version: 3.8.x
 
-      - name: Install Snowflake Connector
-        run: |
-          python -m pip install --upgrade pip
-          pip install snowflake-connector-python
-
-      - name: Execute SQL Scripts
-        run: |
-          for file in snowflake/*.sql; do
-            snowsql -a $SNOWFLAKE_ACCOUNT -u $SNOWFLAKE_USER -p $SNOWFLAKE_PASSWORD \
-                    -w $SNOWFLAKE_WAREHOUSE -d $SNOWFLAKE_DATABASE -s PUBLIC \
-                    -f $file
-          done
+      - name: Run schemachange
         env:
-          SNOWFLAKE_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
-          SNOWFLAKE_USER: ${{ secrets.SF_USERNAME }}
+          SF_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
+          SF_USERNAME: ${{ secrets.SF_USER }}
+          SF_ROLE: ${{ secrets.SF_ROLE }}
+          SF_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
+          SF_DATABASE: ${{ secrets.SF_DATABASE }}
           SNOWFLAKE_PASSWORD: ${{ secrets.SF_PASSWORD }}
-          SNOWFLAKE_DATABASE: ${{ secrets.SF_DATABASE }}
-          SNOWFLAKE_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
+        run: |
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
+          python --version
+          echo "Step 1: Installing schemachange"
+          pip install schemachange
+          
+          echo "Step 2: Running schemachange"
+          schemachange -f $GITHUB_WORKSPACE/snowflake -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE.CHANGE_HISTORY --create-change-history-table
