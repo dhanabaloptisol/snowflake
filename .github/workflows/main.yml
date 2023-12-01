@@ -28,11 +28,14 @@ jobs:
       - name: Show Version
         run:  ~/bin/snowsql -v
 
+      - name: Check path
+        run: ls -l
+
       - name: Execute SQL Scripts
         run: |
           for file in snowflake/*.sql; do
-            ~/bin/snowsql -a $SNOWFLAKE_ACCOUNT -u $SNOWFLAKE_USER -p $SNOWFLAKE_PASSWORD \
-                    -w $SNOWFLAKE_WAREHOUSE -d $SNOWFLAKE_DATABASE -s PUBLIC \
+            ~/bin/snowsql -a OOZELMY.LXB06506 -u dhanabaloptisol -p Optisol@123 \
+                    -w COMPUTE_WH -d sqlsnowtest -s PUBLIC \
                     -f $file
           done
         
