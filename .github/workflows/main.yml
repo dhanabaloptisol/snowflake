@@ -26,7 +26,7 @@ jobs:
       - name: Install SnowSQL
         run:  SNOWSQL_DEST=~/bin SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.9-linux_x86_64.bash
       - name: Show Version
-        run:  whereis snowsql
+        run:  ~/bin/snowsql -V
 
       # - name: Execute SQL Scripts
       #   run: |
