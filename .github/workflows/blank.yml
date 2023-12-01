@@ -25,11 +25,12 @@ jobs:
       run: |
         pip install snowflake-connector-python
 
-    - name: Check location
-      run: ls -l /bin
-
-    - name: check lib
-      run: ls -l /usr/local/bin
+    - name: Download SnowSQL
+      run:  curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.9-linux_x86_64.bash
+    - name: Install SnowSQL
+      run:  SNOWSQL_DEST=~/bin SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.2.9-linux_x86_64.bash
+    - name: Show Version
+      run:  ~/bin/snowsql -v
 
     # - name: Execute SQL Script
     #   run: |
