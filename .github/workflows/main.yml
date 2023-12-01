@@ -34,7 +34,7 @@ jobs:
       - name: Execute SQL Scripts
         run: |
           for file in snowflake/*.sql; do
-            ~/bin/snowsql -a OOZELMY.LXB06506 -u dhanabaloptisol -p Optisol@123 \
+            ~/bin/snowsql -a OOZELMY.LXB06506 -u dhanabaloptisol -p 'Optisol@123' \
                     -w COMPUTE_WH -d sqlsnowtest -s PUBLIC \
                     -f $file
           done
