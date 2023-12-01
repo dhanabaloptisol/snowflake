@@ -31,6 +31,8 @@ jobs:
       - name: Execute SQL Scripts
         run: |
           for file in snowflake/*.sql; do
-            ~/bin/snowsql -f $file
+            ~/bin/snowsql -a $SNOWFLAKE_ACCOUNT -u $SNOWFLAKE_USER -p $SNOWFLAKE_PASSWORD \
+                    -w $SNOWFLAKE_WAREHOUSE -d $SNOWFLAKE_DATABASE -s PUBLIC \
+                    -f $file
           done
         
