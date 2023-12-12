@@ -1,0 +1,27 @@
+name: Copy AWS SnowFlake
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+  
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2.3.3
+
+      - name: Configure AWS 
+        uses: aws-actions/configure-aws-credentials@v1
+        with: 
+          role-to-resume: arn:aws:iam::882027629355:role/github-s3-role
+          aws-region: us-east-1
+      - name: Copy files
+        run: |
+          aws s3 cp . s3://cross-snwoflake-test/
+      
