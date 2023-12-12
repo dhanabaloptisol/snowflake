@@ -23,5 +23,5 @@ jobs:
           aws-region: us-east-1
       - name: Copy files
         run: |
-          aws s3 cp . s3://cross-snwoflake-test/
+          aws s3 cp githu.csv s3://cross-snwoflake-test/
       
