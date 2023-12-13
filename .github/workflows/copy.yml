@@ -14,7 +14,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2.3.3
       - name: Install AWS cli
-        run: apt-get --assume-yes install awscli
+        run: sudo apt-get --assume-yes install awscli
 
       - name: Configure AWS Credentials
         run: |
