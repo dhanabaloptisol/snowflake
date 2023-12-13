@@ -25,6 +25,8 @@ jobs:
           aws_default_region = ${{ secrets.AWS_REGION }}" > ~/.aws/credentials
       - name: Set AWS CLI Configuration
         run: aws --version
+      - name: check aws
+        run: whereis aws        
       - name: Copy files
         run: aws s3 ls
       
