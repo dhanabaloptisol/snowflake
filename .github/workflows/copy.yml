@@ -9,18 +9,20 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
+    
     steps:
       - name: checkout
         uses: actions/checkout@v2.3.3
 
-      - name: Configure AWS 
-        uses: aws-actions/configure-aws-credentials@v4
-        with: 
-          role-to-assume: arn:aws:iam::882027629355:role/github-s3-role
-          aws-region: us-east-1
+      - name: Configure AWS Credentials
+        run: |
+          echo "[default]
+          aws_access_key_id = ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key = ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_default_region = ${{ secrets.AWS_REGION }}" > ~/.aws/credentials
+      - name: Set AWS CLI Configuration
+        run: aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} && aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} && aws configure set default.region ${{ secrets.AWS_REGION }}
+      
       - name: Copy files
         run: |
           aws s3 cp githu.csv s3://cross-snwoflake-test/
