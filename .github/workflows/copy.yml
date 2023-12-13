@@ -25,8 +25,6 @@ jobs:
           aws_default_region = ${{ secrets.AWS_REGION }}" > ~/.aws/credentials
       - name: Set AWS CLI Configuration
         run: aws --version
-      
       - name: Copy files
-        run: |
-          aws s3 cp githu.csv s3://cross-snwoflake-test/
+        run: aws s3 ls
       
