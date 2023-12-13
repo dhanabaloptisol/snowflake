@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2.3.3
+      - name: Create folder and file
+        run: mkdir ~/.aws
 
       - name: Configure AWS Credentials
         run: |
