@@ -13,8 +13,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2.3.3
-      - name: Create folder and file
-        run: mkdir ~/.aws
+      - name: Install AWS cli
+        run: apt-get --assume-yes install awscli
 
       - name: Configure AWS Credentials
         run: |
