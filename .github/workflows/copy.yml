@@ -28,5 +28,5 @@ jobs:
       - name: check aws
         run: whereis aws        
       - name: Copy files
-        run: aws s3 ls
+        run: /usr/bin/aws s3 ls
       
